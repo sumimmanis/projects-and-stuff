@@ -22,7 +22,7 @@ auto& [a, b] = pr;
 
 `std::unordered_map` `std::unordered_set`
 
-Нужег `hash` и `==`
+Нужег `hash` и `==`. Быстрый доступ по ключу $O(1)$.
 
 ```cpp
 template<>
