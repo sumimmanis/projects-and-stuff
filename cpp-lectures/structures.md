@@ -1,10 +1,10 @@
 #### Массив
 ```cpp
 int array[3] = {1, 0, 0};
-int array[3];         (undefined)
-int array[3] = {1};         (оставшиеся по дефолту - нули)
+int array[3];       (undefined)
+int array[3] = {1};       (оставшиеся по дефолту - нули)
 
-sizeof(array);         (размер в битах)
+sizeof(array);       (размер в битах)
 array[i]  <=>  *(array + i);
 func (<type> array[])  <=>  func (*array)
  ```
@@ -13,11 +13,28 @@ func (<type> array[])  <=>  func (*array)
 Элементы массива хранятся в памяти подряд.
 
 #### С строка
-char string[4] = "abc"   (в конце символ конца строки "\0")
-const char* string = "abc"   (то же самое в С-стиле)
-
+```cpp
+char string[4] = "abc"       (в конце символ конца строки "\0")
+const char* string = "abc"       (то же самое в С-стиле)
+```
 Массив это указатель на начало строки. Обычное сравнение строк не работает.
-
+```cpp
 #include <cstring>
-std::strcmp(str1, str2)   (положительное если str1 больше)
-std::strncmp(str1, str2, размер наименьшей)   (безопаснее)
+std::strcmp(str1, str2)       (положительное если str1 больше)
+std::strncmp(str1, str2, размер наименьшей)       (безопаснее)
+```
+
+#### Нормальная строка
+По сути хранит указатель и `sizeof()`
+
+```cpp
+string.c_str()       (возвращает С-строку)
+string.at()       (не дает выйти за рамки массива)
+std::to_string()
+std::stoi()       (string to int)
+```
+```cpp
+std::string_view       (только на чтение. Хранит индекс и длину подстроки)
+std::string_view(адрес, длина)
+std::string::npos       (возвращается если find не нашел подстроку)
+```
