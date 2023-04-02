@@ -16,11 +16,11 @@ auto& [a, b] = pr;
 ```
 
 #### Ассоциативные контейнеры
-`std::map` `std::set`:
+##### `std::map` `std::set`
 
 На ключах должен обязательно быть задан оператор `<`. Поиск по ключу и вставка осуществляется за логарифм.
 
-`std::unordered_map` `std::unordered_set`:
+##### `std::unordered_map` `std::unordered_set`
 
 Нужег `hash` и `==`. Имеет быстрый доступ по ключу $O(1)$.
 
@@ -33,3 +33,19 @@ struct std::hash<Point> {
 }
 ```
 `std::multimap` позволяем иметь несколько ключей
+
+
+#### Адапторы
+
+##### `stack`
+`vector, deque, list`
+
+
+##### `queue`  
+`list, deque`
+
+
+##### `priority_queue`:  
+`deque, vector` Выводит от большего к меньшему.
+
+
