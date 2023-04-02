@@ -32,7 +32,7 @@ delete[] d;
 std::unique_ptr<Foo> up(new Foo()); 
 std::make_unique<Foo>("uniq_ptr")   
 ```
-Удаляет переменную при завершении функции/программы (нельзя копировать). 
+Удаляет переменную при завершении функции/программы, нельзя копировать. 
 ```cpp
 std::shared_ptr<Foo> sp1(new Foo()); 
 std::shared_ptr<Foo> sp2 = sp1; 
