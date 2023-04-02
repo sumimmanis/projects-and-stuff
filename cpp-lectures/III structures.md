@@ -16,13 +16,13 @@ auto& [a, b] = pr;
 ```
 
 #### Ассоциативные контейнеры
-##### `std::map` `std::set`
+##### `std::map` `std::set`:
 
 На ключах должен обязательно быть задан оператор `<`. Поиск по ключу и вставка осуществляется за логарифм.
 
-##### `std::unordered_map` `std::unordered_set`
+##### `std::unordered_map` `std::unordered_set`:
 
-Нужег `hash` и `==`. Имеет быстрый доступ по ключу $O(1)$.
+Имеет быстрый доступ по ключу $O(1)$, нужен `hash` и `==` 
 
 ```cpp
 template<>
@@ -37,11 +37,11 @@ struct std::hash<Point> {
 
 #### Адапторы
 
-##### `stack`
+##### `stack`:
 `vector, deque, list`
 
 
-##### `queue`  
+##### `queue`:
 `list, deque`
 
 
