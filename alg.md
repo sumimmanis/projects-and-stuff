@@ -1,10 +1,89 @@
-cpp```
-void dfs(std::vector<std::vector<int>> &adjacent_vert_list_, std::vector<bool> &used, int curr) {
-    used[curr] = true;
-    for (auto i : adjacent_vert_list_[curr]) {
-        if (!used[i]) {
-            dfs(adjacent_vert_list_, used, i);
+## DFS
+
+```cpp
+std::vector<std::vector<int>> adjacent_vert_list_;
+
+void dfs(std::vector<int> &used, int curr=0, int colour=1) {
+    used[curr] = colour;
+    for (auto next : adjacent_vert_list_[curr]) {
+        if (!used[next]) {
+            dfs(used, next, colour);
         }
     }
 }
 ```
+
+#### Классификация ребер
+```cpp
+void dfs(std::vector<int> &used, int curr = 0) {
+    used[curr] = 1;
+    for (auto next: adjacent_vert_list_[curr]) {
+        if (!used[next]) {
+            dfs(used, next, 1);
+        } else if (used[curr] == 1) {
+            //обратное
+        } else {
+            //прямое или перекрестное
+        }
+    }
+    used[curr] = 2;
+}
+```
+
+#### Топологическа сортировка (рассеянные профессор)
+> ациклический граф
+```cpp
+int dim_;
+std::vector<std::vector<int>> adjacent_vert_list_;
+
+std::list<int> foo() {
+    std::list<int> vct;
+    std::vector<int> used(dim_, 0);
+    for (int i = 0; i < dim_; ++i) {
+        if (!used[i]) {
+            dfs(i, vct, used);
+        }
+    }
+    return vct;
+}
+
+void dfs(int curr, std::list<int> &vct, std::vector<int> &used) {
+    used[curr] = 1;
+    for (auto next : adjacent_vert_list_[curr]) {
+        if (!used[next]) {
+            dfs(next, vct, used);
+        }
+    }
+    vct.push_front(curr);
+}
+```
+
+#### Поиск мостов
+```cpp
+int time_;
+std::vector<std::vector<int>> adjacent_vert_list_;
+
+void dfs(int curr, std::vector<int> &vct, std::vector<int> &tin, std::vector<int> &min, std::vector<int> &used, int prev) {
+        used[curr] = 1;
+        ++time_;
+        tin[curr] = time_;
+        min[curr] = time_;
+        for (auto next : adjacent_vert_list_[curr]) {
+            if (next == prev) {
+                continue;
+            }
+            if (!used[next]) {
+                dfs(next, vct, tin, min, used, curr);
+                min[curr] = std::min(min[v], min[curr]);
+                if (min[next] > tin[curr]) {
+                    vct.push_back(mem_[std::make_pair(curr, next)]);
+                }
+            } else {
+                min[curr] = std::min(min[curr], tin[next]);
+            }
+        }
+    }
+```
+
+#### Точки сочленения
+Поиск мостов но знак $<$ в проверке и отдельно проверить корень.
