@@ -1,5 +1,5 @@
 ## Dijkstra
-
+> Все ребра неотрицательные
 ```cpp
 std::vector<int> dijkstra() {
     std::set<std::pair<int, int>> set;
