@@ -44,9 +44,8 @@ int bfs() {
 ```cpp
 void bfs(int v = 0) {
     std::deque<int> q;
-    std::vector<int> dist(dim_, INT32_MAX);
-    std::vector<int> used(dim_, 0);
-    std::vector<int> prev(dim_, -1);
+    std::vector<int> dist(dim_, INT32_MAX), used(dim_, 0), prev(dim_, -1);
+    
     used[v] = 1;
     dist[v] = 0;
     q.push_back(v);
