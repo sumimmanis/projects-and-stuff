@@ -1,5 +1,5 @@
 ## Dijkstra
-$O(n\log{n} + m\log{n})$ обычно $O(m\log{n})$
+$O(V\log{V} + E\log{V})$ обычно $O(E\log{V})$
 > Все ребра неотрицательные
 ```cpp
 std::vector<int> dijkstra() {
