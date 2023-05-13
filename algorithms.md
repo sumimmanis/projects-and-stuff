@@ -98,6 +98,8 @@ void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin,
 &nbsp;&nbsp;&nbsp;&nbsp;  Разворот графа и DFS в порядке обратном топологической сортировке изначального графа.
 
 ## BFS
+$O(V + E)$  
+Можно реализовать итерируясь по $n + 1$ массивам, где $n$ - максимальная длина ребра.
 
 #### Лабиринт
 
@@ -140,3 +142,54 @@ int bfs() {
     return -1;
 }
 ```
+
+#### Кратчайший путь в 0-1 графе 
+
+```cpp
+std::vector<std::vector<int>> adjacent_vert_list_;
+std::vector<int> belongs_;    //1 или 2, если ребро между 1 и 2 то длина ребра один
+
+void bfs(int v = 0) {
+    std::deque<int> q;
+    std::vector<int> dist(dim_, INT32_MAX);
+    std::vector<int> used(dim_, 0);
+    std::vector<int> prev(dim_, -1);
+    used[v] = 1;
+    dist[v] = 0;
+    q.push_back(v);
+    while (!q.empty()) {
+        auto curr = q.front();
+        q.pop_front();
+        for (auto next: adjacent_vert_list_[curr]) {
+            if (belongs_[next] + belongs_[curr] == 3) {
+                if (dist[next] > dist[curr] + 1) {
+                    dist[next] = dist[curr] + 1;
+                    prev[next] = curr;
+                }
+
+                if (!used[next]) {
+                    q.push_back(next);
+                    used[next] = 1;
+                }
+            } else {
+                if (dist[next] > dist[curr]) {
+                    dist[next] = dist[curr];
+                    prev[next] = curr;
+                }
+                if (!used[next]) {
+                    q.push_front(next);
+                    used[next] = 1;
+                }
+            }
+        }
+    }
+}
+```
+
+#### Вершины на кратчайших путях
+
+Вершина $x$ лежит на кратчайшем пути из $u$ в $v$ если $dist(xu) + dist(xv) == dist(uv)$. Запускаем два BFS и перебираем все вершины.
+
+#### Большие графы
+
+В большх графах лучше поочередно ходить от обеих вершин и проверять пересечеие множеств достижимых.
