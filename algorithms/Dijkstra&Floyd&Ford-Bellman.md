@@ -81,9 +81,9 @@ void fordbellman() {
                 finish = false;
             }
         }
-    }
-    if (finish) {
+        if (finish) {
         return;
+        }
     }
 }
 ```
