@@ -5,25 +5,17 @@ $O(V + E)$
 #### Лабиринт
 
 ```cpp
-#define wall (-1)
-
-std::vector<std::vector<int>> matrix_;
-int x1_, x2_, y1_, y2_;
-
-
 int bfs() {
     std::queue<std::pair<int, int>> q;
-    if (matrix_[x1_][y1_] != wall) {
-        q.emplace(x1_, y1_);
-    }
+
+    q.emplace(x1_, y1_);
 
     if (x1_ == x2_ && y1_ == y2_) {
         return 0;
     }
-    std::vector<std::pair<int, int>> offsets{{-1, 0},
-                                             {1,  0},
-                                             {0,  -1},
-                                             {0,  1}};
+    
+    std::vector<std::pair<int, int>> offsets{{-1, 0}, {1,  0}, {0,  -1}, {0,  1}};
+    
     while (!q.empty()) {
         auto [i, j] = q.front();
         q.pop();
@@ -48,8 +40,6 @@ int bfs() {
 #### Кратчайший путь в 0-1 графе 
 
 ```cpp
-std::vector<std::vector<int>> adjacent_vert_list_;
-
 void bfs(int v = 0) {
     std::deque<int> q;
     std::vector<int> dist(dim_, INT32_MAX);
