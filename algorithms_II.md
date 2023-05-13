@@ -23,7 +23,7 @@ void dfs(std::vector<int> &used, int curr = 0) {
         } else if (used[curr] == 1) {
             //обратное
         } else {
-            //прямое или перекрестное
+            //прямое или перекрестное если отрезки времени не пересекаются
         }
     }
     used[curr] = 2;
@@ -60,10 +60,10 @@ void dfs(int curr, std::list<int> &vct, std::vector<int> &used) {
 
 #### Поиск мостов
 ```cpp
-int time_;
+int time_ = 0;
 std::vector<std::vector<int>> adjacent_vert_list_;
 
-void dfs(int curr, std::vector<int> &vct, std::vector<int> &tin, std::vector<int> &min, std::vector<int> &used, int prev) {
+void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin, std::vector<int> &min, std::vector<int> &used, int prev) {
         used[curr] = 1;
         ++time_;
         tin[curr] = time_;
@@ -74,9 +74,9 @@ void dfs(int curr, std::vector<int> &vct, std::vector<int> &tin, std::vector<int
             }
             if (!used[next]) {
                 dfs(next, vct, tin, min, used, curr);
-                min[curr] = std::min(min[v], min[curr]);
+                min[curr] = std::min(min[next], min[curr]);
                 if (min[next] > tin[curr]) {
-                    vct.push_back(mem_[std::make_pair(curr, next)]);
+                    vct.push_back(std::make_pair(curr, next));
                 }
             } else {
                 min[curr] = std::min(min[curr], tin[next]);
