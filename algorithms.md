@@ -96,4 +96,47 @@ void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin,
 
 Компоненты сильной связности и конденсация:  
 &nbsp;&nbsp;&nbsp;&nbsp;  Разворот графа и DFS в порядке обратном топологической сортировке изначального графа.
+
 ## BFS
+
+#### Лабиринт
+
+```cpp
+#define wall (-1)
+
+std::vector<std::vector<int>> matrix_;
+int x1_, x2_, y1_, y2_;
+
+int bfs() {
+    std::queue<std::pair<int, int>> q;
+    if (matrix_[x1_][y1_] != wall) {
+        q.emplace(x1_, y1_);
+    }
+
+    if (x1_ == x2_ && y1_ == y2_) {
+        return 0;
+    }
+    std::vector<std::pair<int, int>> offsets{{-1, 0},
+                                             {1,  0},
+                                             {0,  -1},
+                                             {0,  1}};
+    while (!q.empty()) {
+        auto [i, j] = q.front();
+        q.pop();
+        for (auto [di, dj]: offsets) {
+            if (i + di < 0 || i + di >= matrix_.size() || j + dj < 0 || j + dj >= matrix_[i].size()) {
+                continue;
+            }
+            if (matrix_[i + di][j + dj] == 0) {
+                matrix_[i + di][j + dj] = matrix_[i][j] + 1;
+                q.emplace(i + di, j + dj);
+            }
+
+            if(i + di == x2_ && j + dj == y2_) {
+                return matrix_[i + di][j + dj];
+            }
+        }
+    }
+    return -1;
+}
+```
