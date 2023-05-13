@@ -70,9 +70,9 @@ $O(VE)$
 
 ```cpp
 void fordbellman() {
-    bool finish = true;
     dist_[0] = 0;
     for (int i = 0; i < dim_ - 1; ++i) {
+        bool finish = true;
         for (int j = 0; j < vert_cnt_; ++j) {
             auto [a, b, d] = edges_[j];
 
