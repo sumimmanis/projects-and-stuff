@@ -30,7 +30,7 @@ void dfs(std::vector<int> &used, int curr = 0) {
 ```
 
 #### Топологическа сортировка (рассеянные профессор)
-> ациклический граф
+> Ациклический граф
 ```cpp
 std::list<int> foo() {
     std::list<int> vct;
