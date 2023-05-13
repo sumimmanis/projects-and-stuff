@@ -93,32 +93,5 @@ void fordbellman() {
 ## Левита
 > Не работает с отрицательными циклами
 
-***Эта плохая реализация в худшем случае дает экспоненциальное время, нужно делать две очереди***
+***Эта плохая реализация на деках в худшем случае дает экспоненциальное время, нужно делать две очереди***
  
-```cpp
-std::vector<int> levits() {
-    std::deque<int> q;
-    std::vector<int> prev(dim_, -1), dist(dim_, INT32_MAX);
-    q.push_front(x_);
-    dist[x_] = 0;
-    while(!q.empty()) {
-        int curr = q.front();
-        q.pop_front();
-        for (auto [next, len] : adjacent_vert_list_[curr]) {
-            if (prev[next] == curr) {
-                continue;
-            }
-            if (dist[next] > dist[curr] + len) {
-                if (dist[next] != INT32_MAX) {
-                    q.push_front(next);
-                } else {
-                    q.push_back(next);
-                }
-                dist[next] = dist[curr] + len;
-                prev[next] = curr;
-            }
-        }
-    }
-    return prev;
-}
-```
