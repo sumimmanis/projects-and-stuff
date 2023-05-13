@@ -1,4 +1,5 @@
 ## Dijkstra
+$O(n\log{n} + m\log{n})$
 > Все ребра неотрицательные
 ```cpp
 std::vector<int> dijkstra() {
