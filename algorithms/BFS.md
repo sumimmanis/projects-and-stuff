@@ -7,8 +7,10 @@ $O(V + E)$
 ```cpp
 int bfs() {
     std::queue<std::pair<int, int>> q;
-
-    q.emplace(x1_, y1_);
+    
+    if (matrix_[x1_, y1_] != -1) {
+        q.emplace(x1_, y1_);
+    }
 
     if (x1_ == x2_ && y1_ == y2_) {
         return 0;
