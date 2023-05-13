@@ -10,6 +10,7 @@ $O(V + E)$
 std::vector<std::vector<int>> matrix_;
 int x1_, x2_, y1_, y2_;
 
+
 int bfs() {
     std::queue<std::pair<int, int>> q;
     if (matrix_[x1_][y1_] != wall) {
@@ -48,7 +49,6 @@ int bfs() {
 
 ```cpp
 std::vector<std::vector<int>> adjacent_vert_list_;
-std::vector<int> belongs_;    //1 или 2, если ребро между 1 и 2 то длина ребра один
 
 void bfs(int v = 0) {
     std::deque<int> q;
@@ -62,26 +62,7 @@ void bfs(int v = 0) {
         auto curr = q.front();
         q.pop_front();
         for (auto next: adjacent_vert_list_[curr]) {
-            if (belongs_[next] + belongs_[curr] == 3) {
-                if (dist[next] > dist[curr] + 1) {
-                    dist[next] = dist[curr] + 1;
-                    prev[next] = curr;
-                }
-
-                if (!used[next]) {
-                    q.push_back(next);
-                    used[next] = 1;
-                }
-            } else {
-                if (dist[next] > dist[curr]) {
-                    dist[next] = dist[curr];
-                    prev[next] = curr;
-                }
-                if (!used[next]) {
-                    q.push_front(next);
-                    used[next] = 1;
-                }
-            }
+            //если 0 то push_front, если 1 то push_back
         }
     }
 }
