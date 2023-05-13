@@ -2,8 +2,6 @@
 $O(V + E)$
 
 ```cpp
-std::vector<std::vector<int>> adjacent_vert_list_;
-
 void dfs(std::vector<int> &used, int curr=0, int colour=1) {
     used[curr] = colour;
     for (auto next : adjacent_vert_list_[curr]) {
@@ -34,9 +32,6 @@ void dfs(std::vector<int> &used, int curr = 0) {
 #### Топологическа сортировка (рассеянные профессор)
 > ациклический граф
 ```cpp
-int dim_;
-std::vector<std::vector<int>> adjacent_vert_list_;
-
 std::list<int> foo() {
     std::list<int> vct;
     std::vector<int> used(dim_, 0);
@@ -61,9 +56,6 @@ void dfs(int curr, std::list<int> &vct, std::vector<int> &used) {
 
 #### Поиск мостов
 ```cpp
-int time_ = 0;
-std::vector<std::vector<int>> adjacent_vert_list_;
-
 void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin, std::vector<int> &up, std::vector<int> &used, int prev) {
         used[curr] = 1;
         ++time_;
