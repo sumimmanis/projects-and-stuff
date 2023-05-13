@@ -120,5 +120,5 @@ std::vector<int> levits() {
         }
     }
     return prev;
-} 
+}
 ```
