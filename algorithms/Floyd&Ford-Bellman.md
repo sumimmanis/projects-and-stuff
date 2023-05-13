@@ -1,26 +1,27 @@
 ## Флойд
 > нет отрицательных циклов
-> в матрице смежности если нет ребра то не сильно большая бесконечность
+> если в матрице смежности нет ребра то ставить не сильно большую бесконечность
+
 ```cpp
 std::vector<std::vector<int>> floyd() {
-        std::vector<std::vector<int>> second_in_path(dim_, std::vector<int>(dim_));    //восстановление пути
+        std::vector<std::vector<int>> next(dim_, std::vector<int>(dim_));    //восстановление пути
         for (int from = 0; from < dim_; ++from) {
             for (int to = 0; to < dim_; ++to) {
-                second_in_path[from][to] = to;
+                next[from][to] = to;
             }
         }
 
         for (int k = 0; k < dim_; ++k) {
             for (int from = 0; from < dim_; ++from) {
                 for (int to = 0; to < dim_; ++to) {
-                    if (matrix_[from][to] > matrix_[from][k] + matrix_[k][to]) {   //не сильно большая бесконечность
+                    if (matrix_[from][to] > matrix_[from][k] + matrix_[k][to]) {   //не делать inf > INT32_MAX - 1
                         matrix_[from][to] = matrix_[from][k] + matrix_[k][to];
-                        second_in_path[from][to] = second_in_path[from][k];
+                        next[from][to] = next[from][k];
                     }
                 }
             }
         }
-        return second_in_path;
+        return next;
     }
 ```
 Через Форда-Беллмана можно находить циклы отрицательного веса, берем все вершины которые улучшились на последней итерации, они и все их наследники не будут иметь кратчайшего расстояния.
