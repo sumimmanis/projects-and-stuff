@@ -65,6 +65,8 @@ std::vector<std::vector<int>> floyd() {
 
 ## Форда-Беллмана
 $O(VE)$
+> С отрицательными циклами работает некорректно  
+
 ```cpp
 void fordbellman() {
     bool finish = true;
@@ -88,8 +90,8 @@ void fordbellman() {
 
 
 ## Левита
-> не работает с отрицательным циклом
-> 
+> Не работает с отрицательными циклами
+ 
 ```cpp
 std::vector<int> levits() {
     std::deque<int> q;
