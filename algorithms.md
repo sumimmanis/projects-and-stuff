@@ -1,4 +1,5 @@
 ## DFS
+$O(V + E)$
 
 ```cpp
 std::vector<std::vector<int>> adjacent_vert_list_;
@@ -63,7 +64,7 @@ void dfs(int curr, std::list<int> &vct, std::vector<int> &used) {
 int time_ = 0;
 std::vector<std::vector<int>> adjacent_vert_list_;
 
-void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin, std::vector<int> &min, std::vector<int> &used, int prev) {
+void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin, std::vector<int> &up, std::vector<int> &used, int prev) {
         used[curr] = 1;
         ++time_;
         tin[curr] = time_;
@@ -73,13 +74,13 @@ void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin,
                 continue;
             }
             if (!used[next]) {
-                dfs(next, vct, tin, min, used, curr);
-                min[curr] = std::min(min[next], min[curr]);
-                if (min[next] > tin[curr]) {
+                dfs(next, vct, tin, up, used, curr);
+                up[curr] = std::min(up[next], up[curr]);
+                if (up[next] > tin[curr]) {
                     vct.push_back(std::make_pair(curr, next));
                 }
             } else {
-                min[curr] = std::min(min[curr], tin[next]);
+                up[curr] = std::min(up[curr], tin[next]);
             }
         }
     }
@@ -87,3 +88,8 @@ void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin,
 
 #### Точки сочленения
 Поиск мостов но знак $<$ в проверке и отдельно проверить корень.
+
+#### Сильная связность
+DFS из $u$ развернуть ребра и снова DFS из $u$.
+
+## BFS
