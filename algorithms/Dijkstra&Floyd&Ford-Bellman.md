@@ -35,7 +35,7 @@ std::vector<int> dijkstra() {
 
 Например если нужно найти самый дешевый перелет с купоном на одну бесплатную поездку, то запускаем две дейкстры и перебираем все вершины $d(x_au) + d(x_bv) = d(uv)$.
 
-## Флойд
+## Флойда
 > Если в матрице смежности нет ребра то ставить не сильно большую бесконечность  
 > С отрицательными циклами работает некорректно, а ребро $ii$ отрицательно если вершина $i$ достижима из них  
 
@@ -63,7 +63,7 @@ std::vector<std::vector<int>> floyd() {
     }
 ```
 
-## Форд-Беллман
+## Форда-Беллмана
 $O(VE)$
 ```cpp
 void fordbellman() {
@@ -87,4 +87,33 @@ void fordbellman() {
 Через Форда-Беллмана можно находить циклы отрицательного веса, берем все вершины которые улучшились на $V - 1$ итерации, они и все их наследники не будут иметь кратчайшего расстояния.
 
 
-
+## Левита
+> не работает с отрицательным циклом
+> 
+```cpp
+std::vector<int> levits() {
+    std::deque<int> q;
+    std::vector<int> prev(dim_, -1), dist(dim_, INT32_MAX);
+    q.push_front(x_);
+    dist[x_] = 0;
+    while(!q.empty()) {
+        int curr = q.front();
+        q.pop_front();
+        for (auto [next, len] : adjacent_vert_list_[curr]) {
+            if (prev[next] == curr) {
+                continue;
+            }
+            if (dist[next] > dist[curr] + len) {
+                if (dist[next] != INT32_MAX) {
+                    q.push_front(next);
+                } else {
+                    q.push_back(next);
+                }
+                dist[next] = dist[curr] + len;
+                prev[next] = curr;
+            }
+        }
+    }
+    return prev;
+} 
+```
