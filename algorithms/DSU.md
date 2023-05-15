@@ -1,11 +1,8 @@
 ## disjoint-set-union
 ```cpp
-std::vector<int> parent_;
-std::vector<int> rank_;
-
-
 void make_set(int v) {
     parent_[v] = v;
+	rank_[v] = 1;
 }
 
 
