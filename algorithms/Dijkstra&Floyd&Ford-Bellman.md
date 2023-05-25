@@ -53,7 +53,8 @@ std::vector<std::vector<int>> floyd() {
         for (int k = 0; k < dim_; ++k) {
             for (int from = 0; from < dim_; ++from) {
                 for (int to = 0; to < dim_; ++to) {
-                    if (matrix_[from][to] > matrix_[from][k] + matrix_[k][to]) {   //не делать inf > INT32_MAX - 1
+                    if (matrix_[from][k] != INT32_MAX && matrix_[k][to] != INT32_MAX &&
+                        (matrix_[from][to] > matrix_[from][k] + matrix_[k][to])) {
                         matrix_[from][to] = matrix_[from][k] + matrix_[k][to];
                         next[from][to] = next[from][k];
                     }
