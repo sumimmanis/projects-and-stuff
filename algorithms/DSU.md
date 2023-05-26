@@ -1,10 +1,20 @@
 ## Disjoint-set-union
 ```cpp
+std::vector<int> parent_;
+std::vector<int> rank_;
+
 void make_set(int v) {
     parent_[v] = v;
 	rank_[v] = 1;
 }
 
+void init(int n) {
+    parent_.resize(n);
+    rank_.resize(n);
+    for (int i = 0; i < n; ++i) {
+        make_set(i);
+    }
+}
 
 int find_set(int v) {
     if (parent_[v] == v)
@@ -12,7 +22,6 @@ int find_set(int v) {
 
     return parent_[v] = find_set(parent_[v]);
 }
-
 
 void union_sets(int a, int b) {
     a = find_set(a);
