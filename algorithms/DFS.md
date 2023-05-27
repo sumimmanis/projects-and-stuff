@@ -60,7 +60,7 @@ void dfs(int curr, std::vector<std::pair<int, int>> &vct, std::vector<int> &tin,
         used[curr] = 1;
         ++time_;
         tin[curr] = time_;
-        min[curr] = time_;
+        up[curr] = time_;
         for (auto next : adjacent_vert_list_[curr]) {
             if (next == prev) {
                 continue;
