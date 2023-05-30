@@ -1,5 +1,5 @@
 ## Range minimum query
-find $O(\log{n})$, change $O(\log{n})$
+_find & change_ &nbsp; $O(\log{n})$  
 ```cpp
 template<typename T>
 struct SegmentTree {
