@@ -6,7 +6,7 @@ struct SegmentTree {
     std::vector<T> tree;
     int right_;
 
-    explicit SegmentTree(std::vector<T> arr) {
+    explicit SegmentTree(std::vector<T> &arr) {
         right_ = arr.size() - 1;
         tree.resize(4 * arr.size(), 0);
         build(arr, 0, 0, arr.size() - 1);
