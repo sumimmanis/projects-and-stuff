@@ -58,12 +58,8 @@ struct SegmentTree {
 };
 ```
 
+#### Somewhat better
 ```cpp
-#include <iostream>
-#include <list>
-#include <queue>
-#include <vector>
-
 template<typename T>
 struct SegTree {
 
@@ -83,14 +79,17 @@ struct SegTree {
         void add(int v, T value) {
             this->sum += value;
             if (left != nullptr) {
-                if (v <= left->r) left->add(v, value);
-                if (v >= right->l) right->add(v, value);
+                if (v <= left->r) {
+                    left->add(v, value);
+                } else {
+                    right->add(v, value);
+                }
             }
         }
 
         T get_sum(int begin, int end) {
             if (begin <= l && r <= end) return this->sum;
-            if (end <= l || r <= begin) return 0;
+            if (end < l || r < begin) return 0;
             return left->get_sum(begin, end) + right->get_sum(begin, end);
         }
 
@@ -99,14 +98,6 @@ struct SegTree {
             delete right;
         }
     } *node;
-
-//    void add(int index, T value) {
-//        root->add(index, value);
-//    }
-
-//    SegTree(int begin, int end) {
-//        node = new Node(begin, end);
-//    }
 
     explicit SegTree(const std::vector<T> &arr) {
         node = new Node(0, arr.size());
@@ -123,11 +114,4 @@ struct SegTree {
         delete node;
     }
 };
-
-int main() {
-    std::vector<int> v = {1, 2, 3, 4, 5, 6, 7};
-    SegTree<int> segTree(v);
-    std::cout << segTree.get_sum(0, 1);
-    return 0;
-}
 ```
