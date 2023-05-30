@@ -1,0 +1,5 @@
+## Range minimum query
+
+```cpp
+
+```
