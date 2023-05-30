@@ -1,3 +1,3 @@
 ## Prefix sum
-$O(n)$ build  
-$O(1)$ find
+$O(n)$ _build_  
+$O(1)$ _find_
