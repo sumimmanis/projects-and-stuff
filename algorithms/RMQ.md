@@ -58,7 +58,7 @@ struct SegmentTree {
 };
 ```
 
-#### Somewhat better
+#### Based on pointers, can be dinamic
 ```cpp
 template<typename T>
 struct SegTree {
