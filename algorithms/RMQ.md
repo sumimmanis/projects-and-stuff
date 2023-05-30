@@ -10,9 +10,6 @@ struct SegmentTree {
         right_ = arr.size() - 1;
         tree.resize(4 * arr.size(), 0);
         build(arr, 0, 0, arr.size() - 1);
-        for (int i: tree) {
-            std::cout << i << ' ';
-        }
     }
 
 
