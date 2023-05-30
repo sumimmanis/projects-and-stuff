@@ -2,6 +2,9 @@
 $O(V + E)$
 
 ```cpp
+std::vector<std::vector<int>> adjacent_vert_list_;
+std::vector<int> used;
+
 void dfs(std::vector<int> &used, int curr=0, int colour=1) {
     used[curr] = colour;
     for (auto next : adjacent_vert_list_[curr]) {
