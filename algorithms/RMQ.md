@@ -57,3 +57,6 @@ struct SegmentTree {
     }
 };
 ```
+
+```cpp
+```
