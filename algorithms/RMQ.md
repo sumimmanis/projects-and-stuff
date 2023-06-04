@@ -61,10 +61,6 @@ struct SegTree {
         node->add(v, value);
     }
 
-//    void add(int u, int v, T value) {
-//        node->add(u, v, value);
-//    }
-
     T get_sum(int begin, int end) {
         return node->get_sum(begin, end);
     }
