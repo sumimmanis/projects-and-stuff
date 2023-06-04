@@ -31,7 +31,6 @@ struct Graph {
     Graph() {
         std::cin >> n_ >> m_;
         matrix_.resize(n_, std::vector<int>(m_));
-
         for (int i = 0; i < n_; ++i) {
             for (int j = 0; j < m_; ++j) {
                 int num;
@@ -52,17 +51,18 @@ struct Graph {
 
         if (matrix_[x1_][y1_] != -1) q.emplace(x1_, y1_);
         if (x1_ == x2_ && y1_ == y2_) return 0;
-        
+
         while (!q.empty()) {
             auto [i, j] = q.front();
             q.pop();
             for (auto [di, dj]: offsets) {
-                if (i + di < 0 || i + di >= matrix_.size() || j + dj < 0 || j + dj >= matrix_[i].size()) continue;
-                if (matrix_[i + di][j + dj] == 0) {
-                    matrix_[i + di][j + dj] = matrix_[i][j] + 1;
-                    q.emplace(i + di, j + dj);
+                if (i + di >= 0 && i + di < matrix_.size() && j + dj >= 0 && j + dj < matrix_[i].size()) {
+                    if (matrix_[i + di][j + dj] == 0) {
+                        matrix_[i + di][j + dj] = matrix_[i][j] + 1;
+                        q.emplace(i + di, j + dj);
+                    }
+                    if (i + di == x2_ && j + dj == y2_) return matrix_[i + di][j + dj];
                 }
-                if (i + di == x2_ && j + dj == y2_) return matrix_[i + di][j + dj];
             }
         }
         return -1;
