@@ -22,7 +22,7 @@ void bfs(int v = 0) {
 }
 ```
 
-#### Лабиринт
+##### Выход из лабиринта
 ```cpp
 struct Graph {
     int n_, m_, x1_, y1_, x2_, y2_;
