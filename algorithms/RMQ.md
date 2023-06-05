@@ -22,11 +22,9 @@ struct SegTree {
 
         void push() {
             if (assign != 0) {
-                if (left != nullptr) { // если дети есть
-                    left->assign += assign;
-                    left->sum += assign;
-                    right->assign += assign;
-                    right->sum += assign;
+                if (left != nullptr) { 
+                    left->assign += assign; left->sum += assign;
+                    right->assign += assign; right->sum += assign;
                 }
                 assign = 0;
             }
@@ -46,13 +44,11 @@ struct SegTree {
 
         void add(int begin, int end, int x) {
             if (begin <= l && r <= end) {
-                assign += x;
-                sum += x;
+                assign += x; sum += x;
             } else if (!(end < l || r < begin)) {
                 extend();
                 if (left != nullptr) {
                     push();
-                    // если есть дети и отрезок запроса хоть как-то пересекается с нашим
                     left->add(begin, end, x);
                     right->add(begin, end, x);
                     sum = left->sum + right->sum;
