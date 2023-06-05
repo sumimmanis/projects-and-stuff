@@ -1,5 +1,5 @@
 ## Range minimum query
-_find & change:_ &nbsp; $O(\log{n})$  
+$O(\log{n})$
 
 ```cpp
 template<typename T>
