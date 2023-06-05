@@ -148,3 +148,7 @@ struct SegmentTree {
     }
 };
 ```
+
+#
+
+[непересекающиеся отрезки](Contests/Sets.md)
