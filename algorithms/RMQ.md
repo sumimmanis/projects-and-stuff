@@ -8,7 +8,7 @@ struct SegTree {
     struct Node {
         Node *left = nullptr, *right = nullptr;
         int l = 0, r = 0;
-        T sum = 0;
+        T sum = 0, assign = 0;
 
         Node(int begin, int end) : l(begin), r(end) {}
 
@@ -17,6 +17,18 @@ struct SegTree {
                 int mid = (l + r) / 2;
                 left = new Node(l, mid);
                 right = new Node(mid + 1, r);
+            }
+        }
+
+        void push() {
+            if (assign != 0) {
+                if (left != nullptr) { // если дети есть
+                    left->assign += assign;
+                    left->sum += assign;
+                    right->assign += assign;
+                    right->sum += assign;
+                }
+                assign = 0;
             }
         }
 
@@ -32,7 +44,24 @@ struct SegTree {
             }
         }
 
+        void add(int begin, int end, int x) {
+            if (begin <= l && r <= end) {
+                assign += x;
+                sum += x;
+            } else if (!(end < l || r < begin)) {
+                extend();
+                if (left != nullptr) {
+                    push();
+                    // если есть дети и отрезок запроса хоть как-то пересекается с нашим
+                    left->add(begin, end, x);
+                    right->add(begin, end, x);
+                    sum = left->sum + right->sum;
+                }
+            }
+        }
+
         T get_sum(int begin, int end) {
+            push();
             if (begin <= l && r <= end) return this->sum;
             if (end < l || r < begin) return 0;
             extend();
@@ -50,15 +79,12 @@ struct SegTree {
         node = new Node(0, end);
     }
 
-    explicit SegTree(const std::vector<T> &arr) {
-        node = new Node(0, arr.size());
-        for (int i = 0; i < arr.size(); ++i) {
-            node->add(i, arr[i]);
-        }
-    }
-
     void add(int v, T value) {
         node->add(v, value);
+    }
+
+    void add(int u, int v, int value) {
+        node->add(u, v, value);
     }
 
     T get_sum(int begin, int end) {
