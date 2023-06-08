@@ -151,4 +151,4 @@ struct SegmentTree {
 
 #
 
-[непересекающиеся отрезки](Contests/UnintersectingSets.md)
+[непересекающиеся отрезки](Contests/unintersectingSets.md)
