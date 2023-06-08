@@ -27,5 +27,5 @@ void bfs(int v = 0) {
 
 # 
 
-[выход из лабиринта](Contests/Maze.md)
+[выход из лабиринта](contests/Maze.md)
 
