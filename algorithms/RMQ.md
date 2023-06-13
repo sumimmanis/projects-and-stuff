@@ -3,92 +3,71 @@ $O(\log{n})$ на изменение и запись, можно динамич�
 
 ```cpp
 template<typename T>
-struct SegTree {
+struct Node {
+    Node *left = nullptr, *right = nullptr;
+    int l = 0, r = 0;
+    T sum = 0, assign = 0;
 
-    struct Node {
-        Node *left = nullptr, *right = nullptr;
-        int l = 0, r = 0;
-        T sum = 0, assign = 0;
+    Node(int begin, int end) : l(begin), r(end) {}
 
-        Node(int begin, int end) : l(begin), r(end) {}
-
-        void extend() {
-            if (left == nullptr && l < r) {
-                int mid = (l + r) / 2;
-                left = new Node(l, mid);
-                right = new Node(mid + 1, r);
-            }
+    void extend() {
+        if (left == nullptr && l < r) {
+            int mid = (l + r) / 2;
+            left = new Node(l, mid);
+            right = new Node(mid + 1, r);
         }
+    }
 
-        void push() {
-            if (assign != 0) {
-                if (left != nullptr) { 
-                    left->assign += assign; left->sum += assign;
-                    right->assign += assign; right->sum += assign;
-                }
-                assign = 0;
-            }
-        }
-
-        void add(int v, T value) {
-            extend();
-            this->sum += value;
+    void push() {
+        if (assign != 0) {
             if (left != nullptr) {
-                if (v <= left->r) {
-                    left->add(v, value);
-                } else {
-                    right->add(v, value);
-                }
+                left->assign += assign;
+                left->sum += assign;
+                right->assign += assign;
+                right->sum += assign;
             }
+            assign = 0;
         }
-
-        void add(int begin, int end, int x) {
-            if (begin <= l && r <= end) {
-                assign += x; sum += x;
-            } else if (!(end < l || r < begin)) {
-                extend();
-                if (left != nullptr) {
-                    push();
-                    left->add(begin, end, x);
-                    right->add(begin, end, x);
-                    sum = left->sum + right->sum;
-                }
-            }
-        }
-
-        T get_sum(int begin, int end) {
-            push();
-            if (begin <= l && r <= end) return this->sum;
-            if (end < l || r < begin) return 0;
-            extend();
-            return left->get_sum(begin, end) + right->get_sum(begin, end);
-        }
-
-        ~Node() {
-            delete left;
-            delete right;
-        }
-    } *node;
-
-
-    explicit SegTree(int end) {
-        node = new Node(0, end);
     }
 
     void add(int v, T value) {
-        node->add(v, value);
+        extend();
+        this->sum += value;
+        if (left != nullptr) {
+            if (v <= left->r) {
+                left->add(v, value);
+            } else {
+                right->add(v, value);
+            }
+        }
     }
 
-    void add(int u, int v, int value) {
-        node->add(u, v, value);
+    void add(int begin, int end, T x) {
+        if (begin <= l && r <= end) {
+            assign += x;
+            sum += x;
+        } else if (!(end < l || r < begin)) {
+            extend();
+            if (left != nullptr) {
+                push();
+                left->add(begin, end, x);
+                right->add(begin, end, x);
+                sum = left->sum + right->sum;
+            }
+        }
     }
 
     T get_sum(int begin, int end) {
-        return node->get_sum(begin, end);
+        push();
+        if (begin <= l && r <= end) return this->sum;
+        if (end < l || r < begin) return 0;
+        extend();
+        return left->get_sum(begin, end) + right->get_sum(begin, end);
     }
 
-    ~SegTree() {
-        delete node;
+    ~Node() {
+        delete left;
+        delete right;
     }
 };
 ```
