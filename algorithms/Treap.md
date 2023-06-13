@@ -49,3 +49,5 @@ struct Node {
     }
 };
 ```
+
+#### Implicit treap
