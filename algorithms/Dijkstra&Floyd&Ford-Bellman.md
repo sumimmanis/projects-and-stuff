@@ -110,3 +110,34 @@ void fordbellman() {
 ## Yen's algorithm
 
 ## Johnson's algorithm
+
+#
+
+```cpp
+bool test_negative_cycles() {
+    for (int v = 1; v <= n; ++v) {
+        for (auto u : g[v]) {
+            if (distance_to_vertex[v] != inf && distance_to_vertex[u] > distance_to_vertex[v] + weight[{v, u}]) {
+                cout << "Negative cycle: " << u << " ";
+                while (v != u) {
+                    cout << v << " ";
+                    v = previous[v];
+                }
+                cout << endl;
+                return true;
+            }
+        }
+    }
+    cout << "No negative cycles." << endl;
+    return false;
+}
+
+int main() {
+    read_data();
+    init_data();
+    Bellman_Ford(start_vertex);
+    if (!test_negative_cycles()) {
+        print_distance();
+    }
+}
+```
