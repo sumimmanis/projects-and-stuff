@@ -6,7 +6,7 @@ $O(E\log{V})$
 
 ```cpp
 int dim_, x_;
-std::vector<std::vector<std::pair<int, int>>> adjacent_vert_list_;  //[i] = j, k
+std::vector<std::vector<std::pair<int, int>>> adjacent_vert_list_;    //[i] = j, k
 
 std::vector<int> dijkstra() {
     std::set<std::pair<int, int>> set;
@@ -99,7 +99,7 @@ void fordbellman() {
 Через Форда-Беллмана можно находить циклы отрицательного веса, берем все вершины которые улучшились на $V - 1$ итерации, они и все их наследники не будут иметь кратчайшего расстояния.
 
 
-## Левита
-> С отрицательными циклами работает некорректно 
 
-На практике реализация [на деках](https://e-maxx.ru/algo/levit_algorithm) неплохо работает.
+## [Levit's algorithm](https://e-maxx.ru/algo/levit_algorithm)
+
+## Yen's algorithm
