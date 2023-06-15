@@ -174,3 +174,54 @@ for (int i=0; i<n; ++i) {
 		}
 }
 ```
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+const int INF = 2e9; // бесконечность
+
+int main() {
+    int n, s, m;
+    cin >> n >> s >> m;
+
+    vector<vector<pair<int, int>>> adj(n + 1); // список смежности
+
+    for (int i = 0; i < m; i++) {
+        int a, b, w;
+        cin >> a >> b >> w;
+        adj[a].push_back({b, w}); // добавляем ребро в список смежности
+    }
+
+    vector<int> dist(n + 1, INF); // массив для хранения расстояний
+    dist[s] = 0; // расстояние от столицы до самой себя равно 0
+
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq; // очередь с приоритетом
+    pq.push({0, s}); // добавляем столицу в очередь
+
+    while (!pq.empty()) { // пока в очереди есть элементы
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+
+        if (d > dist[u]) continue; // если расстояние до нашей вершины уже меньше, то пропускаем ее
+
+        for (auto v : adj[u]) { // проходимся по всем ее соседям
+            if (dist[u] + v.second < dist[v.first]) { // если путь через нашу вершину короче
+                dist[v.first] = dist[u] + v.second; // обновляем расстояние до вершины
+                pq.push({dist[v.first], v.first}); // добавляем ее в очередь
+            }
+        }
+    }
+
+    for (int i = 1; i <= n; i++) {
+        if (dist[i] == INF) cout << "? "; // если расстояние до вершины равно бесконечности, то выводим "?"
+        else cout << dist[i] << " ";
+    }
+
+    return 0;
+}
+```
