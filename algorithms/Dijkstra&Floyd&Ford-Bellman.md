@@ -47,18 +47,19 @@ std::vector<int> dijkstra() {
 
 ## Флойда
 $O(V^3)$
-> С отрицательными циклами работает некорректно, а ребро $ii$ отрицательно если вершина $i$ достижима из них  
+> Если вершина достижима из отрицательного цикла, то работает некорректно, а ребро $ii$ отрицательно
 
 ```cpp
 std::vector<std::vector<int>> floyd() {
         std::vector<std::vector<int>> next(dim_, std::vector<int>(dim_));    //восстановление пути
+        
         for (int from = 0; from < dim_; ++from) {
             for (int to = 0; to < dim_; ++to) {
                 next[from][to] = to;
             }
         }
 
-        for (int k = 0; k < dim_; ++k) {
+        for (int k = 0; k < dim_; ++k) {    //важно что это именно внешний цикл
             for (int from = 0; from < dim_; ++from) {
                 for (int to = 0; to < dim_; ++to) {
                     if (matrix_[from][k] != INT32_MAX && matrix_[k][to] != INT32_MAX &&
@@ -78,6 +79,10 @@ $O(VE)$
 > С отрицательными циклами работает некорректно  
 
 ```cpp
+int dim_, vert_cnt_;
+std::vector<std::tuple<int, int, int>> edges_;
+std::vector<int> dist_(dim_, INT32_MAX);
+
 void fordbellman() {
     dist_[0] = 0;
     for (int i = 0; i < dim_ - 1; ++i) {
