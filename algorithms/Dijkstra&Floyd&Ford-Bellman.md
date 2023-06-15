@@ -5,11 +5,16 @@ $O(E\log{V})$
 Можно использовать для всех задач в которых характеристика пути не может стать лучше.
 
 ```cpp
+int dim_, x_;
+std::vector<std::vector<std::pair<int, int>>> adjacent_vert_list_;  //[i] = j, k
+
 std::vector<int> dijkstra() {
     std::set<std::pair<int, int>> set;
     std::vector<int> prev(dim_, -1), dist(dim_, INT32_MAX);
+    
     set.insert({0, x_});
     dist[x_] = 0;
+    
     while(!set.empty()) {
         auto [r, curr] = *set.begin();
         set.erase(set.begin());
