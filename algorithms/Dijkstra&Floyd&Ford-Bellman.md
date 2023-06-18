@@ -37,7 +37,7 @@ std::vector<int> dijkstra() {
 #### Вершины и ребра на кратчайших путях
 
 Вершина $x$ лежит на кратчайшем пути из $u$ в $v$ если $d(xu) + d(xv) = d(uv)$. Запускаем две дейкстры и перебираем все вершины.  
-Для ребер: $d(x_au) + d(x_bv) + dx = d(uv)$.
+Таким же образом можно перебирать и ребра $d(x_au) + d(x_bv) + dx = d(uv)$.
 
 #### Самолеты
 Запускаем две дейкстры и перебираем все вершины $d(x_au) + d(x_bv) = d(uv)$.
@@ -129,37 +129,6 @@ bool test_negative_cycles() {
 ## Yen's algorithm
 
 ## Johnson's algorithm
-
-#
-
-```cpp
-bool test_negative_cycles() {
-    for (int v = 1; v <= n; ++v) {
-        for (auto u : g[v]) {
-            if (distance_to_vertex[v] != inf && distance_to_vertex[u] > distance_to_vertex[v] + weight[{v, u}]) {
-                cout << "Negative cycle: " << u << " ";
-                while (v != u) {
-                    cout << v << " ";
-                    v = previous[v];
-                }
-                cout << endl;
-                return true;
-            }
-        }
-    }
-    cout << "No negative cycles." << endl;
-    return false;
-}
-
-int main() {
-    read_data();
-    init_data();
-    Bellman_Ford(start_vertex);
-    if (!test_negative_cycles()) {
-        print_distance();
-    }
-}
-```
 
 ## Прима
 ```cpp
