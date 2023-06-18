@@ -1,5 +1,5 @@
-// Disjoint-set-union
-
+## Disjoint-set-union
+```cpp
 std::vector<int> parent_;
 std::vector<int> rank_;
 
@@ -35,3 +35,4 @@ void union_sets(int a, int b) {
         parent_[b] = a;
     }
 }
+```
