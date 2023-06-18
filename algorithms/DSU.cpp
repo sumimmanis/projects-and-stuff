@@ -1,5 +1,5 @@
-## Disjoint-set-union
-```cpp
+// Disjoint-set-union
+
 std::vector<int> parent_;
 std::vector<int> rank_;
 
@@ -36,8 +36,5 @@ void union_sets(int a, int b) {
     }
 }
 
-```
 
-#### Алгоритм Краскала
-Нужно построить связный граф с наименьшей суммой весов ребер:  
-Сортируем ребра и если вершины из разных компонент свяности, то объединяем.
+
