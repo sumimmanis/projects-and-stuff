@@ -35,6 +35,3 @@ void union_sets(int a, int b) {
         parent_[b] = a;
     }
 }
-
-
-
