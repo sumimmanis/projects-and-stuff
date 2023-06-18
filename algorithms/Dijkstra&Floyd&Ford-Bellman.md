@@ -102,6 +102,26 @@ void fordbellman() {
 }
 ```
 Через Форда-Беллмана можно находить циклы отрицательного веса, берем все вершины которые улучшились на $V - 1$ итерации, они и все их наследники не будут иметь кратчайшего расстояния.
+```cpp
+bool test_negative_cycles() {
+    for (int i = 0; i < dim_; ++i) {
+        for (int j = 0; j < vert_cnt_; ++j) {
+            auto [a, b, d] = edges_[j];
+		
+            if ((dist_[a] != INT32_MAX) && (dist_[a] + d < dist_[b])) {
+                std::cout << "Negative cycle: " << b << " ";
+                while (a != b) {
+                    std::cout << a << " ";
+                    a = prev[a];    
+                }
+                std::cout << std::endl;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+```
 
 
 
