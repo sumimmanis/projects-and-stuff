@@ -4,9 +4,6 @@
 struct Node {
     int x_, y_;
     Node *left = nullptr, *right = nullptr;
-
-
-
     explicit Node(int x) : x_(x), y_(std::rand()) {}
 } *head;
 
@@ -79,9 +76,6 @@ Node* del(int x) {
 struct Node {
     int x_, y_, size;
     Node *left = nullptr, *right = nullptr;
-
-    Node() {}
-
     explicit Node(int x) : x_(x), y_(std::rand()), size(0) {}
 } *head;
 
