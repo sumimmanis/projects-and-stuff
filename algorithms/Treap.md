@@ -1,5 +1,5 @@
 ## Treap
-Все операции за $O(\log{n})$
+$O(\log{n})$
 ```cpp
 struct Node {
     int x_, y_;
